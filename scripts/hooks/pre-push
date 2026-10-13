@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+while read local_ref local_sha remote_ref remote_sha; do
+  if [ "$remote_ref" = "refs/heads/main" ]; then
+    echo "BLOCKED: do not push to main. Use a branch (pX/weekN-topic) and open a PR."
+    exit 1
+  fi
+done
+exit 0

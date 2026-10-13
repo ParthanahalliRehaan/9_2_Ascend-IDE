@@ -1,0 +1,26 @@
+node_modules/
+dist/
+.pnpm-store/
+target/
+src-tauri/gen/
+__pycache__/
+*.pyc
+.venv/
+venv/
+.pytest_cache/
+.ruff_cache/
+.env
+.env.*
+!.env.example
+pocketbase/pocketbase
+pocketbase/pocketbase.exe
+pocketbase/pb_data/
+pb_data/
+phoenix_data/
+services/evals/reports/*.tmp
+.DS_Store
+Thumbs.db
+.idea/
+
+# Personal notes (not part of the project)
+Person1s-Instructions/

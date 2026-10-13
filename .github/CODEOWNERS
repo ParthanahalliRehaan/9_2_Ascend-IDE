@@ -1,0 +1,20 @@
+# Ownership follows PLAN.md section 2.
+/apps/desktop/src/                          @parthanahallirehaan
+/apps/desktop/package.json                  @parthanahallirehaan
+/.github/workflows/                         @parthanahallirehaan
+/scripts/                                   @parthanahallirehaan
+/services/evals/                            @parthanahallirehaan
+/packages/agent-obs/                        @parthanahallirehaan
+/contracts/trace-schema.json                @parthanahallirehaan
+/docs/EVALS.md                              @parthanahallirehaan
+/docs/FRICTION.md                           @parthanahallirehaan
+/services/review-agent/                     @devik-kalathiya
+/apps/desktop/src-tauri/src/git.rs          @devik-kalathiya
+/apps/desktop/src-tauri/src/violations.rs   @devik-kalathiya
+/apps/desktop/src-tauri/src/clipboard.rs    @devik-kalathiya
+/services/instructions-agent/               @akbijarnia
+/pocketbase/                                @akbijarnia
+/contracts/openapi.yaml                     @parthanahallirehaan @devik-kalathiya @akbijarnia
+/docs/ARCHITECTURE.md                       @parthanahallirehaan @devik-kalathiya @akbijarnia
+/docs/GIT_WORKFLOW.md                       @parthanahallirehaan @devik-kalathiya @akbijarnia
+/README.md                                  @parthanahallirehaan @devik-kalathiya @akbijarnia
