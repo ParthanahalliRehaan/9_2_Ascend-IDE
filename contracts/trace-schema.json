@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "AgentTrace",
+  "description": "One record per agent LLM call.",
+  "type": "object",
+  "required": ["trace_id", "agent", "prompt_version", "model", "input", "output", "tokens_in", "tokens_out", "latency_ms", "error"],
+  "additionalProperties": false,
+  "properties": {
+    "trace_id": { "type": "string" },
+    "agent": { "type": "string", "enum": ["instructions-agent", "review-agent"] },
+    "prompt_version": { "type": "string" },
+    "model": { "type": "string" },
+    "input": { "type": "string" },
+    "output": { "type": "string" },
+    "tokens_in": { "type": "integer", "minimum": 0 },
+    "tokens_out": { "type": "integer", "minimum": 0 },
+    "latency_ms": { "type": "number", "minimum": 0 },
+    "error": { "type": ["string", "null"] }
+  }
+}
