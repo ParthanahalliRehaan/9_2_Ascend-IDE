@@ -1,0 +1,116 @@
+openapi: 3.1.0
+info:
+  title: Agentic IDE Agent APIs
+  version: 0.0.1
+  description: Shared contract between the desktop app and the local agent services.
+
+servers:
+  - url: http://127.0.0.1:8002
+    description: review-agent (local)
+
+paths:
+  /health:
+    get:
+      tags: [review-agent]
+      summary: Liveness check
+      operationId: reviewHealth
+      responses:
+        "200":
+          description: Service is up
+          content:
+            application/json:
+              schema:
+                type: object
+                required: [status, service]
+                properties:
+                  status:
+                    type: string
+                    example: ok
+                  service:
+                    type: string
+                    example: review-agent
+
+  /review:
+    post:
+      tags: [review-agent]
+      summary: Review a day's work
+      description: >
+        Takes the diff since the last checkpoint and the day's expected tasks,
+        and returns review notes, mistakes, suggested solutions, and whether
+        the work shows a violation.
+      operationId: reviewDay
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ReviewRequest"
+      responses:
+        "200":
+          description: Review completed
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ReviewResponse"
+        "422":
+          description: Request body failed validation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "500":
+          description: Review failed
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
+components:
+  schemas:
+    ReviewRequest:
+      type: object
+      required: [diff, expected_tasks, project_id, day]
+      properties:
+        diff:
+          type: string
+          description: Unified diff since the last checkpoint. May be empty.
+        expected_tasks:
+          type: array
+          description: Tasks the student was expected to complete today.
+          items:
+            type: string
+        project_id:
+          type: string
+          description: PocketBase project record id.
+        day:
+          type: integer
+          minimum: 1
+          description: Day number within the project plan.
+    ReviewResponse:
+      type: object
+      required: [notes, mistakes, solutions, violation]
+      properties:
+        notes:
+          type: array
+          description: General observations about the day's work.
+          items:
+            type: string
+        mistakes:
+          type: array
+          description: Problems found in the submitted work.
+          items:
+            type: string
+        solutions:
+          type: array
+          description: Suggested fixes for the mistakes.
+          items:
+            type: string
+        violation:
+          type: boolean
+          description: True if the work shows a rule violation.
+    Error:
+      type: object
+      required: [detail]
+      properties:
+        detail:
+          type: string
